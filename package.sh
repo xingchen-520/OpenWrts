@@ -11,5 +11,16 @@ git clone --depth 1 -b master  https://github.com/UnblockNeteaseMusic/luci-app-u
 # OpenClash
 git clone --depth 1 https://github.com/vernesong/OpenClash.git package/luci-app-openclash
 
-# 添加包含 wifidog / nodogsplash 或相关准入认证界面的第三方源
-git clone https://github.com/kenzok8/openwrt-packages.git package/extra-packages
+# # ====== 引入第三方源并精准提取认证插件 ======
+# 1. 先把全家桶克隆到一个临时目录，不污染主包
+git clone --depth 1 https://github.com/kenzok8/openwrt-packages.git package/temp-packages
+
+# 2. 创建我们自己的专属提取目录
+mkdir -p package/my-auth-plugins
+
+# 3. 只把我们急需的 nodogsplash 和 wifidog 插件移动过来
+mv package/temp-packages/*nodogsplash* package/my-auth-plugins/
+mv package/temp-packages/*wifidog* package/my-auth-plugins/
+
+# 4. 彻底删掉临时目录，防止与其他自带插件发生同名冲突
+rm -rf package/temp-packages
