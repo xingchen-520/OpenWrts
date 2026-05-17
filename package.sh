@@ -11,8 +11,8 @@ git clone --depth 1 -b master  https://github.com/UnblockNeteaseMusic/luci-app-u
 # OpenClash
 git clone --depth 1 https://github.com/vernesong/OpenClash.git package/luci-app-openclash
 
-# # ====== 引入第三方源并精准提取认证插件 ======
-# 1. 先把全家桶克隆到一个临时目录，不污染主包
+# ====== 引入第三方源并精准提取认证插件（防止同名重复冲突导致编译失败） ======
+# 1. 先把全家桶克隆到一个临时目录
 git clone --depth 1 https://github.com/kenzok8/openwrt-packages.git package/temp-packages
 
 # 2. 创建我们自己的专属提取目录
