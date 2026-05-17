@@ -13,3 +13,12 @@ echo "src-git passwall2 https://github.com/Openwrt-Passwall/openwrt-passwall2.gi
 
 # iStore
 echo "src-git istore https://github.com/linkease/istore;main" >> feeds.conf.default
+
+# 1. 强制在编译时集成树莓派5所需的全部无线网卡固件，防止开机“待激活”
+echo "CONFIG_PACKAGE_brcmfmac-firmware-43455-sdio=y" >> .config
+echo "CONFIG_PACKAGE_brcmfmac-firmware-43456-pcie=y" >> .config
+
+# 2. 强行开启 iptables 核心兼容层和 NAT 增强模块，打通 nodogsplash 的依赖冲突
+echo "CONFIG_PACKAGE_kmod-ipt-nat=y" >> .config
+echo "CONFIG_PACKAGE_kmod-ipt-nat-extra=y" >> .config
+echo "CONFIG_PACKAGE_kmod-nft-compat=y" >> .config
